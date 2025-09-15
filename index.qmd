@@ -1,0 +1,24 @@
+---
+title: "Dolma Sherpa — STA 9750 Submissions"
+---
+
+## Welcome
+
+Hello! My name is Dolma Sherpa, and I am currently pursuing an M.S. in Business Analytics at Baruch College. Alongside my graduate studies, I work as an Operations Coordinator at a consulting boutique in New York City.
+
+I am excited to learn more about **data analytics** and **visualization tools** to drive insights, create meaningful impact, and, honestly, *make my work life more efficient and easier*.
+
+Outside of academics and work, I enjoy exploring NYC’s diverse food scene, attending many *free* events around the city, and spending time with my 5-year-old niece any chance I get.
+
+[Let's connect on LinkedIn!](https://www.linkedin.com/in/sherpa-dolma/)
+
+------------------------------------------------------------------------
+
+```{r}
+#| include: false
+1+1
+```
+
+------------------------------------------------------------------------
+
+Last Updated: `r format(Sys.time(), "%A %m %d, %Y at %H:%M%p")`
