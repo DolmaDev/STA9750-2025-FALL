@@ -10,7 +10,16 @@ I am excited to learn more about **data analytics** and **visualization tools** 
 
 Outside of academics and work, I enjoy exploring NYC’s diverse food scene, attending many *free* events around the city, and spending time with my 5-year-old niece any chance I get.
 
-[Let's connect on LinkedIn!](https://www.linkedin.com/in/sherpa-dolma/)
+Connect with me
+- 📧 Email: [dolmadiki.sherpa@baruchmail.cuny.edu](mailto:dolmadiki.sherpa@baruchmail.cuny.edu)
+- 🔗 LinkedIn: [linkedin.com/in/sherpa-dolma](https://www.linkedin.com/in/sherpa-dolma/)
+
+#This site hosts my submissions for STA 9750.  
+
+- **Mini Project 01** — [Open report](mp01.html)
+- **Mini Project 02** — [Placeholder (coming soon)](mp02.html)
+- **Mini Project 03** — [Placeholder (coming soon)](mp03.html)
+- **Mini Project 04** — [Placeholder (coming soon)](mp04.html)
 
 ------------------------------------------------------------------------
 

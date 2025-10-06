@@ -1,0 +1,361 @@
+---
+title: "Mini Project 01: Gourmet Cheeseburgers Across the Globe"
+author: "Dolma Sherpa"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: true
+    code-summary: "Show code"
+    df-print: paged
+execute:
+  echo: true
+  warning: false
+  message: false
+project:
+  output-dir: docs
+---
+# Introduction
+
+This report analyzes Netflix’s public Top 10 data, cleans key fields, runs focused EDA, answers 10 analysis questions, and finishes with three press-release style summaries intended for a PR audience.
+
+## **Setup, Download, Import, and Cleaning**
+
+The following chunk contains all necessary library loads, data downloads, and initial cleaning. It is folded by default for cleaner viewing.
+
+```{r}
+# Setup, Download, Import, and Cleaning 
+if(!dir.exists(file.path("data", "mp01"))){
+  dir.create(file.path("data", "mp01"), showWarnings=FALSE, recursive=TRUE)
+}
+
+GLOBAL_TOP_10_FILENAME <- file.path("data", "mp01", "global_top10_alltime.csv")
+if(!file.exists(GLOBAL_TOP_10_FILENAME)){
+  download.file("[https://www.netflix.com/tudum/top10/data/all-weeks-global.tsv](https://www.netflix.com/tudum/top10/data/all-weeks-global.tsv)", 
+                destfile=GLOBAL_TOP_10_FILENAME)
+}
+
+COUNTRY_TOP_10_FILENAME <- file.path("data", "mp01", "country_top10_alltime.csv")
+if(!file.exists(COUNTRY_TOP_10_FILENAME)){
+  download.file("[https://www.netflix.com/tudum/top10/data/all-weeks-countries.tsv](https://www.netflix.com/tudum/top10/data/all-weeks-countries.tsv)", 
+destfile=COUNTRY_TOP_10_FILENAME)
+}
+
+# Library Loading
+if(!require("tidyverse")) install.packages("tidyverse")
+library(readr)
+library(dplyr)
+library(lubridate)
+library(DT)
+library(stringr)
+
+# Data Loading
+GLOBAL_TOP_10 <- read_tsv(GLOBAL_TOP_10_FILENAME)
+COUNTRY_TOP_10 <- read_tsv(COUNTRY_TOP_10_FILENAME, na = c("N/A"))
+
+# Cleaning: Convert literal "N/A" string to proper NA
+GLOBAL_TOP_10 <- GLOBAL_TOP_10 |>
+  mutate(season_title = if_else(season_title == "N/A", NA_character_, season_title))
+
+glimpse(GLOBAL_TOP_10)
+glimpse(COUNTRY_TOP_10)
+
+# Helper function
+format_titles <- function(df){
+  colnames(df) <- str_replace_all(colnames(df), "_", " ") |> str_to_title()
+  df
+}
+
+GLOBAL_TOP_10 |> 
+  head(n=20) |>
+  datatable(options=list(searching=FALSE, info=FALSE),
+            caption = "Sample of Global Top 10 (first 20 rows)")
+
+GLOBAL_TOP_10 |> 
+  format_titles() |>
+  head(n=20) |>
+  datatable(options=list(searching=FALSE, info=FALSE),
+            caption = "Global Top 10 (prettified labels)") |>
+  formatRound(c('Weekly Hours Viewed', 'Weekly Views'))
+
+GLOBAL_TOP_10 |> 
+  select(-season_title) |>
+  format_titles() |>
+  head(n=20) |>
+  datatable(options=list(searching=FALSE, info=FALSE),
+            caption = "Global Top 10 (no season_title)") |>
+  formatRound(c('Weekly Hours Viewed', 'Weekly Views'))
+
+GLOBAL_TOP_10 |> 
+  mutate(`runtime_(minutes)` = round(60 * runtime)) |>
+  select(-season_title, -runtime) |>
+  format_titles() |>
+  head(n=20) |>
+  datatable(options=list(searching=FALSE, info=FALSE),
+            caption = "Runtime converted to minutes") |>
+  formatRound(c('Weekly Hours Viewed', 'Weekly Views'))
+```
+
+# Key Netflix Findings through Exploration
+
+This section includes the full analysis (Q1-Q10). The code for all steps below is combined into one chunk, allowing reviewers to fold/unfold the entire block of calculations at once.
+
+## Key Findings Summary
+
+Here are the highlights from Questions 1 through 10:
+
+1. Netflix operates in **94 distinct countries** based on Top 10 reporting.  
+2. The non-English film with the most cumulative global Top 10 weeks is *All Quiet on the Western Front* (**23 weeks**).  
+3.The longest film in the global Top 10 is *Pushpa 2: The Rule (Reloaded Version)* with a runtime of about **3.73 hours**.  
+4. Top programs by global viewing hours per category are:  
+   - Films (English): *KPop Demon Hunters* (**591.3M hours**)  
+   - Films (Non-English): *Society of the Snow* (**235.9M hours**)  
+   - TV (English): *Stranger Things* (**2.97B hours**)  
+   - TV (Non-English): *Squid Game* (**5.05B hours**)  
+5. The longest TV run in a single country’s Top 10 is *Pablo Escobar, el patrón del mal* in Colombia — **102 consecutive weeks** (July 2021 → June 2023).  
+6. The one major country missing ~200 weeks of data is **Russia**, with only **35 weeks** reported, ending February 2022.  
+7. *Squid Game* has generated over **5.31 billion global viewing hours**, making it Netflix’s biggest TV hit.  
+8. *Red Notice* logged **enough hours in 2021 to equal ~2.7 billion views**, based on its 118-minute runtime.  
+9. Several films in the U.S. eventually hit #1 without debuting there; the most recent is *Unknown Number: The High School Catfish*.  
+10. The TV show/season with the widest simultaneous debut was identified by counting countries at debut — marking the global power of Netflix originals.
+
+
+```{r}
+# Analysis (Q1–Q10)
+
+# Q1. How many different countries does Netflix operate in (proxy)?
+country_count <- COUNTRY_TOP_10 |>
+  filter(!is.na(country_name)) |>
+  summarise(n_countries = n_distinct(country_name)) |>
+  pull(n_countries)
+country_count
+
+# Q2. Which non-English film has spent the most cumulative weeks in the global Top 10?
+non_english_top <- GLOBAL_TOP_10 |>
+  filter(category == "Films (Non-English)") |>
+  group_by(show_title) |>
+  summarise(total_weeks = n(), .groups = "drop") |>
+  arrange(desc(total_weeks))
+head(non_english_top, 1)
+
+# Q3. What is the longest film (English or non-English) to appear in the global Top 10?
+longest_films <- GLOBAL_TOP_10 |>
+  filter(category %in% c("Films (English)", "Films (Non-English)"),
+         !is.na(runtime)) |>
+  group_by(show_title) |>
+  summarise(runtime_min = max(runtime, na.rm = TRUE), .groups = "drop") |>
+  arrange(desc(runtime_min))
+head(longest_films, 1)
+
+# Q4. For each category, which program has the most total global viewing hours?
+top_programs_by_category <- GLOBAL_TOP_10 |>
+  group_by(category, show_title) |>
+  summarise(total_hours = sum(weekly_hours_viewed, na.rm = TRUE), .groups = "drop_last") |>
+  slice_max(order_by = total_hours, n = 1, with_ties = FALSE) |>
+  ungroup() |>
+  arrange(category)
+
+# Q5. Which TV show had the longest run in a country’s Top 10?
+longest_tv_run <- COUNTRY_TOP_10 |>
+  filter(!is.na(week), grepl("^TV", category)) |>
+  group_by(country_name, show_title) |>
+  arrange(week, .by_group = TRUE) |>
+  mutate(
+    gap_days   = as.integer(week - lag(week)),
+    new_streak = if_else(is.na(gap_days) | gap_days != 7L, 1L, 0L),
+    streak_id  = cumsum(coalesce(new_streak, 1L))
+  ) |>
+  group_by(country_name, show_title, streak_id) |>
+  summarise(
+    streak_weeks = n(),
+    start_week   = min(week, na.rm = TRUE),
+    end_week     = max(week, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(desc(streak_weeks), desc(end_week)) |>
+  slice(1)
+
+# Q6. Country with a notably short service history window
+country_weeks <- COUNTRY_TOP_10 |>
+  filter(!is.na(week)) |>
+  group_by(country_name) |>
+  summarise(
+    n_weeks   = n_distinct(week),
+    last_week = max(week, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(n_weeks, country_name)
+country_weeks_outlier <- slice_head(country_weeks, n = 1)
+
+# Q7. Total viewership of Squid Game (all seasons)
+squid_game_total <- GLOBAL_TOP_10 |>
+  filter(grepl("Squid Game", show_title, ignore.case = TRUE),
+         grepl("^TV", category)) |>
+  summarise(total_hours = sum(weekly_hours_viewed, na.rm = TRUE))
+
+# Q8. Approximate 2021 views for Red Notice (runtime 118 minutes)
+red_notice_views_2021 <- GLOBAL_TOP_10 |>
+  filter(show_title == "Red Notice", lubridate::year(week) == 2021) |>
+  summarise(
+    total_hours_2021 = sum(weekly_hours_viewed, na.rm = TRUE),
+    approx_views_2021 = (total_hours_2021 * 60) / 118
+  )
+
+# Q9. Films that reached #1 in the US but did not debut at #1 (+ most recent)
+films_reach1_after_count <- COUNTRY_TOP_10 |>
+  filter(country_name == "United States", grepl("^Films", category)) |>
+  group_by(show_title) |>
+  summarise(
+    debut_week   = min(week, na.rm = TRUE),
+    debut_rank   = weekly_rank[which.min(week)],
+    ever_rank1   = any(weekly_rank == 1, na.rm = TRUE),
+    first_week_1 = if (ever_rank1) min(week[weekly_rank == 1], na.rm = TRUE) else as.Date(NA),
+    .groups = "drop"
+  ) |>
+  filter(ever_rank1, debut_rank != 1) |>
+  summarise(n = n()) |>
+  pull(n)
+
+most_recent_reach1 <- COUNTRY_TOP_10 |>
+  filter(country_name == "United States", grepl("^Films", category)) |>
+  group_by(show_title) |>
+  summarise(
+    debut_week   = min(week, na.rm = TRUE),
+    debut_rank   = weekly_rank[which.min(week)],
+    ever_rank1   = any(weekly_rank == 1, na.rm = TRUE),
+    first_week_1 = if (ever_rank1) min(week[weekly_rank == 1], na.rm = TRUE) else as.Date(NA),
+    .groups = "drop"
+  ) |>
+  filter(ever_rank1, debut_rank != 1) |>
+  arrange(desc(first_week_1)) |>
+  slice(1)
+
+# Q10. Which TV show/season hit Top 10 in the most countries in its debut week?
+q10_debut_reach <- COUNTRY_TOP_10 |>
+  filter(grepl("^TV", category)) |>
+  group_by(show_title, season_title) |>
+  mutate(overall_debut_week = min(week, na.rm = TRUE)) |>
+  ungroup() |>
+  filter(week == overall_debut_week) |>
+  group_by(show_title, season_title, overall_debut_week) |>
+  summarise(countries_at_overall_debut = n_distinct(country_name), .groups = "drop") |>
+  arrange(desc(countries_at_overall_debut), desc(overall_debut_week)) |>
+  slice(1)
+```
+# PRESS RELEASES
+This section contains three press-release style summaries, each followed by the code used to generate the supporting statistics.
+
+## Press Release 1 — Stranger Things, Season 5
+
+**Stranger Things Heads Upside Down One Last Time: Netflix’s Biggest Hit Prepares Its Final Showdown**
+
+As Season 5 of *Stranger Things* approaches in late 2025, Netflix is cranking the walkie-talkies to Channel Eleven and celebrating the show that turned Hawkins, Indiana into a global phenomenon.  
+
+Across its first four seasons, *Stranger Things* has racked up more than **2.97 billion hours watched**, staying in the Top 10 for **50 weeks** and capturing fans in **93 countries** — from small towns like Hawkins to the farthest corners of the real world.  
+
+To put it in perspective, that’s more staying power than the **Demogorgon** itself.  
+
+No other English-language TV series on Netflix has matched its reach, with *Wednesday* (**2.88B hours**) and *Bridgerton* (**2.28B hours**) trailing just behind.  
+
+With the gang gearing up for one last ride into the Upside Down, it’s clear that *Stranger Things* isn’t just a series — it’s a **pop-culture event that reshaped Netflix history.**
+
+
+```{r}
+# Press Release 1 — Stranger Things (Season 5 Hype)
+stranger_hours <- GLOBAL_TOP_10 |>
+  filter(show_title == "Stranger Things") |>
+  summarise(total_hours = sum(weekly_hours_viewed, na.rm = TRUE))
+stranger_weeks <- GLOBAL_TOP_10 |>
+  filter(show_title == "Stranger Things") |>
+  summarise(total_weeks = n())
+stranger_countries <- COUNTRY_TOP_10 |>
+  filter(show_title == "Stranger Things") |>
+  summarise(n_countries = n_distinct(country_name))
+top_english_tv <- GLOBAL_TOP_10 |>
+  filter(category == "TV (English)") |>
+  group_by(show_title) |>
+  summarise(total_hours = sum(weekly_hours_viewed, na.rm = TRUE), .groups = "drop") |>
+  arrange(desc(total_hours)) |>
+  slice_head(n = 5)
+```
+## Press Release 2 — Netflix in India
+
+**India Presses Play: Netflix Surges With Record Viewership and Expanding Stories**
+
+Netflix today announced record engagement in **India**, underscoring the country’s role as one of the company’s fastest-growing markets.  
+
+Viewers in India logged more than **18 billion viewing hours in 2025 so far**, up dramatically from **13.6 billion in 2021**, with a peak of **28 billion in 2022**.  
+
+This surge reflects not only subscriber growth, but also a deepening appetite for variety: the number of unique titles making India’s Top 10 more than doubled in just two years, climbing from **157 in 2021 to 353 in 2023**.  
+
+From thrillers to romance to big-hearted dramas, Indian audiences are embracing a diverse slate that blends homegrown storytelling with global hits. And while Bollywood continues to set the pace, viewers in India are also powering international blockbusters such as *Squid Game* and *The Witcher* — both of which have topped charts in **94 countries worldwide**.  
+
+For Netflix, the message is clear: India isn’t just watching — it’s shaping what the world is watching.
+```{r}
+# Press Release 2 — India Growth
+india_global_hours <- GLOBAL_TOP_10 |>
+  filter(show_title %in% (COUNTRY_TOP_10 |> filter(country_name == "India") |> pull(show_title))) |>
+  mutate(year = year(week)) |>
+  group_by(year) |>
+  summarise(total_hours = sum(weekly_hours_viewed, na.rm = TRUE), .groups = "drop") |>
+  arrange(year)
+india_titles_by_year <- COUNTRY_TOP_10 |>
+  filter(country_name == "India") |>
+  mutate(year = year(week)) |>
+  group_by(year) |>
+  summarise(unique_titles = n_distinct(show_title), .groups = "drop") |>
+  arrange(year)
+india_multinational_hits <- COUNTRY_TOP_10 |>
+  filter(country_name == "India") |>
+  distinct(show_title) |>
+  inner_join(
+    COUNTRY_TOP_10 |>
+      group_by(show_title) |>
+      summarise(n_countries = n_distinct(country_name), .groups = "drop"),
+    by = "show_title"
+  ) |>
+  arrange(desc(n_countries)) |>
+  slice_head(n = 5)
+```
+## Press Release 3 — Netflix’s Global Expansion
+
+**From Hollywood to the World: Netflix’s Non-English Originals Drive Global Growth**
+
+Netflix today announced record engagement with its **non-English film and series catalog**, underscoring the company’s success in expanding beyond the United States to become a truly global entertainment platform.  
+
+Since **2021**, non-English films on Netflix have more than **doubled their global viewing hours**, climbing from **1.4 billion** to **3.7 billion in 2024**, outpacing the growth of English-language films over the same period. This momentum reflects a deliberate investment in local-language stories that resonate across borders.  
+
+The payoff is clear. Landmark releases such as Germany’s *All Quiet on the Western Front* (**23 weeks in the global Top 10**), Spain’s *Society of the Snow* (**235M hours viewed**), and Korea’s *Squid Game* (**5.3B hours viewed worldwide**) have set new benchmarks for global impact. In Colombia, *Pablo Escobar, el patrón del mal* maintained a Top 10 presence for **102 consecutive weeks**, demonstrating the enduring popularity of regionally produced hits.  
+
+> “Netflix’s fastest growth is happening where we’ve leaned into local voices,” said a Netflix Spokesperson.  
+> “Our investment in non-English films and series is expanding opportunities for creators everywhere and delivering authentic stories that connect with audiences around the world.”  
+
+With record-breaking global engagement and a growing share of non-English originals in its catalog, Netflix continues to redefine streaming for a worldwide audience — proving that the future of entertainment speaks **every language**.
+
+```{r}
+
+# Press Release 3 — Non-English Films Momentum
+non_english_films_by_year <- GLOBAL_TOP_10 |>
+  filter(category == "Films (Non-English)") |>
+  mutate(year = year(week)) |>
+  group_by(year) |>
+  summarise(total_hours = sum(weekly_hours_viewed, na.rm = TRUE), .groups = "drop") |>
+  arrange(year)
+english_films_by_year <- GLOBAL_TOP_10 |>
+  filter(category == "Films (English)") |>
+  mutate(year = year(week)) |>
+  group_by(year) |>
+  summarise(total_hours = sum(weekly_hours_viewed, na.rm = TRUE), .groups = "drop") |>
+  arrange(year)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| include: false
+1+1
+```
+
+------------------------------------------------------------------------
+
+Last Updated: `r format(Sys.time(), "%A %m %d, %Y at %H:%M%p")`

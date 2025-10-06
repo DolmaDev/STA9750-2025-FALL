@@ -85,7 +85,22 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">STA 9750 Submission Material</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools tools-end">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./mp01.html"> 
+<span class="menu-text">MP01</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -122,10 +137,17 @@ ul.task-list li input[type="checkbox"] {
 <p>Hello! My name is Dolma Sherpa, and I am currently pursuing an M.S. in Business Analytics at Baruch College. Alongside my graduate studies, I work as an Operations Coordinator at a consulting boutique in New York City.</p>
 <p>I am excited to learn more about <strong>data analytics</strong> and <strong>visualization tools</strong> to drive insights, create meaningful impact, and, honestly, <em>make my work life more efficient and easier</em>.</p>
 <p>Outside of academics and work, I enjoy exploring NYC’s diverse food scene, attending many <em>free</em> events around the city, and spending time with my 5-year-old niece any chance I get.</p>
-<p><a href="https://www.linkedin.com/in/sherpa-dolma/">Let’s connect on LinkedIn!</a></p>
+<p>Connect with me - 📧 Email: <a href="mailto:dolmadiki.sherpa@baruchmail.cuny.edu">dolmadiki.sherpa@baruchmail.cuny.edu</a> - 🔗 LinkedIn: <a href="https://www.linkedin.com/in/sherpa-dolma/">linkedin.com/in/sherpa-dolma</a></p>
+<p>#This site hosts my submissions for STA 9750.</p>
+<ul>
+<li><strong>Mini Project 01</strong> — <a href="mp01.html">Open report</a></li>
+<li><strong>Mini Project 02</strong> — <a href="mp02.html">Placeholder (coming soon)</a></li>
+<li><strong>Mini Project 03</strong> — <a href="mp03.html">Placeholder (coming soon)</a></li>
+<li><strong>Mini Project 04</strong> — <a href="mp04.html">Placeholder (coming soon)</a></li>
+</ul>
 <hr>
 <hr>
-<p>Last Updated: Sunday 09 14, 2025 at 22:33PM</p>
+<p>Last Updated: Monday 10 06, 2025 at 01:24AM</p>
 
 
 </section>
@@ -203,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/github\.com\/DolmaDev\/STA9750-2025-FALL\.git");
+        var filterRegex = new RegExp("https:\/\/DolmaDev\.github\.io\/STA9750-2025-FALL\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
