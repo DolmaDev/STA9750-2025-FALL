@@ -1,29 +1,3 @@
----
-title: "Mini Project 02: Making Backyards Affordable for All"
-author: "Dolma Sherpa"
-format:
-  html:
-    embed-resources: true
-    toc: true
-    toc-depth: 2
-    code-fold: true
-    code-summary: "Show code"
-    df-print: paged
-execute:
-  echo: true
-  warning: false
-  message: false
-project:
-  output-dir: docs
----
-
-## Introduction
-Background on housing affordability, motivation, and data sources (ACS, BLS).
-
-## Task 1 – Data Acquisition
-The following chunk contains all the data import code provided and is folded for organization. 
-
-```{r}
 #Data import
 if(!dir.exists(file.path("data", "mp02"))){
   dir.create(file.path("data", "mp02"), showWarnings=FALSE, recursive=TRUE)
@@ -281,13 +255,6 @@ get_bls_qcew_annual_averages <- function(start_year=2009, end_year=2023){
 }
 
 WAGES <- get_bls_qcew_annual_averages()
-```
-
-## Pre-Processing 
-Firstly, examined the structure of six datasets (households, income, rent, population, building permits, and wages) to understand what information each contains.
-
-Then standardized all column names to lowercase and ensured the datasets use consistent location identifiers so they can be combined and compared in later analysis.
-```{r}
 # ---- 1. Explore Loaded Data ----
 
 glimpse(HOUSEHOLDS)
@@ -310,16 +277,10 @@ WAGES <- WAGES %>% rename_with(tolower)
 # ---- 3. Align join key names ----
 
 PERMITS <- PERMITS %>% rename(geoid = cbsa)
-```
-## Task 2 – Multi-Table Questions
 
-Please find all answers and code snippets below. Some are 2 parts while oters are single part.
+# ---- Task 2: Multi-Table Question 1 ----
+# Which CBSA permitted the largest number of new housing units (2010–2019)?
 
-Q1. Which CBSA (by name) permitted the largest number of new housing units in the decade from 2010 to 2019 (inclusive)?
-
-Houston–The Woodlands–Sugar Land, TX permitted the most new housing units during the decade. This highlights Houston’s long-standing permissive zoning and its ability to accommodate strong population inflows.
-
-```{r}
 permits_decade <- PERMITS %>%
   filter(year >= 2010, year <= 2019) %>%
   group_by(geoid) %>%
@@ -328,13 +289,10 @@ permits_decade <- PERMITS %>%
   left_join(select(HOUSEHOLDS, geoid, name), by = "geoid")
 
 head(permits_decade, 5)
-```
 
-Q2. In what year did Albuquerque, NM (CBSA Number 10740) permit the most new housing units?
+# ---- Task 2: Multi-Table Question 2 (exclude 2020) ----
+# In what year did Albuquerque, NM (CBSA 10740) permit the most new housing units?
 
-Albuquerque, NM recorded its highest number of new permits in 2021. The post-pandemic surge suggests short-term recovery rather than sustained, long-run growth.
-
-```{r}
 albuquerque_peak <- PERMITS %>%
   filter(geoid == 10740, year != 2020) %>%       # exclude 2020 due to COVID data gap
   group_by(year) %>%
@@ -342,15 +300,9 @@ albuquerque_peak <- PERMITS %>%
   arrange(desc(total_permits))
 
 head(albuquerque_peak, 3)
-```
 
-Q3. Which state (not CBSA) had the highest average individual income in 2015? 
-
-Washington, DC ranked highest in per-capita income, closely followed by Massachusetts. Concentrations of government and knowledge-based jobs continue to sustain above-average regional wages.
-
-```{r}
 # ---- Task 2: Multi-Table Question 3 (part 1) ----
-# Computed total income per CBSA and prepare for state-level aggregation
+# Compute total income per CBSA and prepare for state-level aggregation
 
 income_state <- INCOME %>%
   filter(year == 2015) %>%                                  # focus on 2015
@@ -361,7 +313,8 @@ income_state <- INCOME %>%
 glimpse(income_state)
 
 # ---- Task 2: Multi-Table Question 3 (part 2) ----
-# Extracted principal state abbreviation from CBSA names
+# Extract principal state abbreviation from CBSA names
+# Some CBSAs span multiple states; we only take the first listed
 
 income_state <- income_state %>%
   mutate(state = str_extract(name, ", (.{2})")) %>% 
@@ -379,14 +332,9 @@ state_income_2015 <- income_state %>%
   arrange(desc(avg_individual_income))
 
 head(state_income_2015, 5)
-```
-Q4. What is the last year in which the NYC CBSA had the most data scientists in the country? 
 
-New York City last led national employment in NAICS 5182 (data analytics) in 2015, before San Francisco overtook it. This shift illustrates how the nation’s tech-talent hub has migrated westward over the last decade.
-
-```{r}
 # ---- Task 2: Multi-Table Question 4 (part 1) ----
-# Converted BLS FIPS codes (e.g., "C1074") to numeric GEOID format (e.g., 10740)
+# Convert BLS FIPS codes (e.g., "C1074") to numeric GEOID format (e.g., 10740)
 
 WAGES <- WAGES %>%
   mutate(
@@ -413,12 +361,10 @@ leaders_by_year %>%
   filter(geoid_bls == 35620) %>%
   arrange(desc(year)) %>%
   head(10)
-```
-Q5.What fraction of total wages in the NYC CBSA was earned by people employed in the finance and insurance industries (NAICS code 52)? In what year did this fraction peak?
 
-Finance & Insurance wages peaked around 4.6 percent of total wages in 2014. The sector remains dominant but relatively stable, while employment growth has diversified into other industries.
+# ---- Task 2: Multi-Table Question 5 ----
+# Fraction of total wages in NYC (CBSA 35620) from Finance & Insurance (NAICS 52)
 
-```{r}
 finance_share_nyc <- WAGES %>%
   filter(geoid_bls == 35620) %>%
   group_by(year) %>%
@@ -430,13 +376,8 @@ finance_share_nyc <- WAGES %>%
   arrange(desc(finance_share))
 
 head(finance_share_nyc, 5)
-```
 
-## Task 3 - Initial Visualizations
-Plot 1 – Monthly Rent vs Household Income (2009)
-
-The scatterplot shows a strong positive linear relationship between median household income and median monthly rent across CBSAs. Higher-income regions tend to have proportionally higher rents, reflecting income-linked housing markets. The regression line reinforces a consistent affordability gradient nationwide.
-```{r}
+# ---- Task 3, Plot 1: Rent vs Household Income (2009) ----
 library(ggplot2)
 library(scales)
 library(dplyr)
@@ -466,11 +407,8 @@ p_rent_income_2009 <- ggplot(rent_income_2009,
   theme_bw(base_size = 12)
 
 print(p_rent_income_2009)
-```
-Plot 2 – Health-Sector Employment vs Total Employment (2009–2023)
 
-Across all periods, CBSAs with larger overall workforces also support greater employment in health care and social assistance. The share of health-sector jobs rises steadily over time, indicating the sector’s expanding importance within regional labor markets. The facet panels reveal both growth and resilience in health-care employment, even through economic fluctuations.
-```{r}
+# ---- Task 3, Plot 2: Total vs Health-sector Employment (evolution over time) ----
 library(ggplot2)
 library(scales)
 library(dplyr)
@@ -482,14 +420,14 @@ total_emp <- WAGES %>%
   summarise(total_emp = sum(employment, na.rm = TRUE), .groups = "drop")
 
 # 2) Health sector (NAICS 62*) employment per CBSA-year
-# Including all industries whose NAICS code starts with "62" (62, 621, 622, 623, 624, ...)
+# Include all industries whose NAICS code starts with "62" (62, 621, 622, 623, 624, ...)
 health_emp <- WAGES %>%
   mutate(industry_chr = as.character(industry)) %>%
   filter(str_starts(industry_chr, "62")) %>%
   group_by(geoid_bls, year) %>%
   summarise(health_emp = sum(employment, na.rm = TRUE), .groups = "drop")
 
-# 3) Joined and created coarse time periods to make evolution readable
+# 3) Join, and create coarse time periods to make evolution readable
 emp_df <- total_emp %>%
   inner_join(health_emp, by = c("geoid_bls", "year")) %>%
   filter(!is.na(total_emp), !is.na(health_emp)) %>%
@@ -500,7 +438,7 @@ emp_df <- total_emp %>%
   )) %>%
   mutate(period = factor(period, levels = c("2009–2012","2013–2016","2017–2023")))
 
-# 4) Final plot (small multiples to show evolution)
+# 4) Publication-ready plot (small multiples to show evolution)
 p_emp_health <- ggplot(emp_df, aes(x = total_emp, y = health_emp)) +
   geom_point(alpha = 0.5) +
   facet_wrap(~ period) +
@@ -516,11 +454,8 @@ p_emp_health <- ggplot(emp_df, aes(x = total_emp, y = health_emp)) +
   theme_bw(base_size = 12)
 
 print(p_emp_health)
-```
-Plot 3 – Average Household Size Over Time (2009–2023)
 
-Most CBSAs maintain stable household sizes near 2.5–3 people, though minor variations persist across metro areas. Los Angeles shows slightly larger average households, while New York’s trend remains flatter and slightly lower. Overall, stability suggests slow demographic shifts despite population growth and housing pressures.
-```{r}
+# ---- Task 3, Plot 3: Average Household Size over Time (Extra Credit) ----
 # Packages
 library(ggplot2)
 library(dplyr)
@@ -560,21 +495,10 @@ p_household_size <- ggplot(household_size,
   theme(legend.position = "none")
 
 print(p_household_size)
-```
 
-## Task 4: Rent Burden
+# ---- Task 4: Rent Burden Metric (Population-Weighted Version) ----
 
-Key Findings
-
-To evaluate housing affordability, I developed a population-weighted Rent Burden Index that scales the rent-to-income ratio so that 100 represents the national weighted average.
-CBSAs with values below 100 spend proportionally less of their income on rent, while those above 100 face greater housing cost pressure.
-
-In 2023, the least-burdened CBSAs, such as Albertville, AL Micro Area and Mount Airy, NC Micro Area, registered index values near 70, with rent-to-income ratios around 0.14 — meaning typical residents spent only 14 % of income on rent, well below the national benchmark.
-By contrast, the most-burdened CBSAs exceeded 130 on the index, underscoring how larger metros continue to struggle with sustained rent pressure even as smaller markets remain relatively affordable.
-```{r}
-# ---- Task 4: Rent Burden Metric ----
-
-# 1) Joined RENT, INCOME, POPULATION 
+# 1) Join RENT, INCOME, POPULATION 
 rent_burden_weighted <- RENT %>%
   inner_join(INCOME,    by = c("geoid", "name", "year")) %>%
   inner_join(POPULATION, by = c("geoid", "name", "year")) %>%
@@ -595,7 +519,7 @@ rent_burden_weighted <- rent_burden_weighted %>%
     rent_burden_index_weighted = (rent_to_income / baseline_rent_ratio_pop) * 100
   )
 
-# 4) Compared to unweighted baseline if available
+# 4) (Optional) Compare to unweighted baseline if available
 if (exists("baseline_rent_ratio")) {
   compare_baselines <- data.frame(
     baseline_unweighted = baseline_rent_ratio,
@@ -630,18 +554,10 @@ compare_sample <- rent_burden_weighted %>%
   select(name, rent_burden_index_weighted) %>%
   arrange(desc(rent_burden_index_weighted)) %>%
   head(10)
-```
-## Task 4 - Metro pick: Pittsburgh
 
-I chose Pittsburgh, PA Metro Area because it was the first place I called home after moving to the U.S., and it still feels like the one city I could always see myself returning to.
-I’ve thought about moving back a few times — though, truthfully, the food in Jackson Heights might be the only thing keeping me rooted in NYC right now.
+cat("\nTop 10 snapshot (Weighted):\n")
+print(compare_sample)
 
-Looking at the numbers, Pittsburgh’s story validates that instinct.
-
-From 2009 to 2018, its population-weighted Rent Burden Index consistently stayed below the national benchmark (≈80–82 vs. 100), meaning the typical resident spent roughly 16–17% of income on rent — well under the national average.
-
-While rents have risen modestly, income growth has largely kept pace, preserving affordability and making Pittsburgh a quiet YIMBY success story in contrast to the escalating rent pressures of larger coastal metros
-```{r}
 # ---- Task 4 Tables: DT outputs for trend + top/bottom ----
 suppressPackageStartupMessages({ library(dplyr); library(DT) })
 
@@ -702,27 +618,11 @@ if (interactive()) {
 
 # Console fallbacks (so you still see something when knitting to PDF)
 cat("\nTrend (first 10 rows) —", METRO_PICK, ":\n"); print(head(rent_burden_trend_dt, 10))
-```
-## Task 5: Housing Growth Index
 
-To capture how actively regions expand their housing supply, I constructed two complementary metrics:
-
-1. An Instantaneous Housing Growth Index measuring the number of housing units permitted per 1,000 residents, and
-
-2. A Rate-Based Index comparing new permits to population growth over a rolling five-year window.
-Both are standardized so that 100 = the national average, making the comparison intuitive across CBSAs.
-
-In 2023, Salisbury, MD and Myrtle Beach, SC topped the instantaneous index with values ≈ 900–1,000—nearly 10 times the national rate—reflecting extraordinary post-pandemic expansion along the Southeast corridor.
-Conversely, Wheeling, WV–OH and Danville, IL recorded single-digit scores, highlighting stagnation in smaller Rust-Belt metros.
-When combining the two measures into a Composite Housing Growth Index, the highest performers clustered in Florida and Texas (e.g., Cape Coral–Fort Myers and Austin–Round Rock), while the lowest were concentrated in older industrial areas of the Midwest and Appalachia.
-
-Together, these findings illustrate the uneven geography of U.S. homebuilding: rapid suburban expansion in the Sun Belt versus minimal permit activity in legacy metros—an imbalance that continues to shape affordability and migration patterns.
-
-```{r}
 # ---- Task 5: Base join + 5-year population lookback ----
 library(dplyr)
 
-# Joined POPULATION and PERMITS, per CBSA-year
+# Join POPULATION and PERMITS, per CBSA-year
 housing_base <- POPULATION %>%
   select(geoid, name, year, population) %>%
   inner_join(
@@ -857,22 +757,8 @@ cat("Top 10 CBSAs (Composite Housing Growth, 5-Year Rolling):\n")
 print(top10_composite)
 cat("\nBottom 10 CBSAs:\n")
 print(bottom10_composite)
-```
-## Task 6: Relationship Between Rent Burden and Housing Growth
 
-Plot A – Housing Growth vs. Change in Rent Burden
-
-This scatterplot compares five-year housing growth against the change in rent burden from 2009–2011 to 2023.
-
-CBSAs in the upper-left quadrant—high growth with falling rent burden—represent clear YIMBY successes such as Austin and Sarasota, where permitting kept pace with demand and improved affordability.
-
-By contrast, the lower-right quadrant signals NIMBY pressure, where weak construction coincides with rising rent costs, notably in legacy metros like New York and Los Angeles.
-
-Overall, areas with sustained population growth and strong permitting activity tend to experience slower rent escalation, suggesting supply responsiveness helps moderate housing costs.
-
-```{r}
-
-#Visualizing Rent Burden vs Housing Growth
+# ---- Task 6: Visualizing Rent Burden vs Housing Growth ----
 library(dplyr)
 library(ggplot2)
 library(stringr)
@@ -949,17 +835,6 @@ plot_a <- ggplot(task6_summary,
 
 plot_a
 
-```
-Plot A – Housing Growth vs. Change in Rent Burden
-
-This scatterplot compares five-year housing growth against the change in rent burden from 2009–2011 to 2023.
-
-CBSAs in the upper-left quadrant—high growth with falling rent burden—represent clear YIMBY successes such as Austin and Sarasota, where permitting kept pace with demand and improved affordability.
-
-By contrast, the lower-right quadrant signals NIMBY pressure, where weak construction coincides with rising rent costs, notably in legacy metros like New York and Los Angeles.
-
-Overall, areas with sustained population growth and strong permitting activity tend to experience slower rent escalation, suggesting supply responsiveness helps moderate housing costs.
-```{r}
 # Plot B: Rent Burden Index Over Time — Selected CBSAs (polished)
 focus_cbsa <- c(
   "New York-Newark-Jersey City, NY-NJ-PA Metro Area",
@@ -985,58 +860,5 @@ plot_b <- ggplot(rb_traj, aes(x = year, y = rent_burden_index_weighted, color = 
   theme_minimal(base_size = 13)
 
 plot_b
-```
-# Task 7 — Policy Brief: Making Backyards Affordable for All
 
-## Executive Summary
-The *Making Backyards Affordable Act* encourages local governments to expand housing supply through measurable YIMBY performance incentives. By tying federal grants to proven indicators of affordability and housing production, this legislation aligns national resources with local success.
 
-Across the U.S., rent burdens have risen faster than wages, particularly in metros that restrict development. Our analysis uses two standardized indices—**Rent Burden Index (RBI)** and **Housing Growth Index (HGI)**—to identify where affordability has improved and where it has stagnated.
-
----
-
-## Proposed Sponsors
-
-| Role | City (Representative Base) | Why Selected |
-|------|-----------------------------|---------------|
-| **Primary Sponsor (YIMBY Success)** | **Austin–Round Rock–San Marcos, TX Metro Area** | Rapid population growth and sustained permitting activity (HGI > 240), yet rent burden near or below the national average (≈ 100). Represents measurable YIMBY success. |
-| **Co-Sponsor (Needs Federal Incentives)** | **New York–Newark–Jersey City, NY-NJ-PA Metro Area** | Persistent rent pressure (RBI ≈ 110 – 115) and limited relative housing expansion (HGI ≈ 100). A prime candidate for capacity-building incentives. |
-
----
-
-## Coalition Strategy: Labor & Industry Partners
-
-| Occupation / Union | Presence & Stake | How the Bill Benefits Them |
-|--------------------|------------------|-----------------------------|
-| **Construction & Skilled Trades** | High employment in both metros; cyclical exposure to housing cycles. | Sustained federal funding for local permitting ensures stable union jobs and predictable project pipelines. |
-| **Service & Hospitality Workers** | Large renter population; concentrated in urban cores. | Lower rent burden frees disposable income → increased local spending, greater shift stability, and tip reliability. |
-
-These sectors provide strong, bipartisan anchors for local support: they link affordability relief (workers as renters) and growth (workers as builders).
-
----
-
-## Metrics for Accountability (Non-Technical Summary)
-
-- **Rent Burden Index (RBI)**  
-  Proportion of median income spent on rent, standardized so **100 = national average**.  
-  *Higher = less affordable; falling RBI = improvement.*
-
-- **Housing Growth Index (HGI)**  
-  Number of new housing units permitted per 1,000 residents, standardized so **100 = national average**.  
-  Includes a **5-year rolling composite** to smooth volatility and highlight sustained growth.
-
-These transparent indices allow Congress to reward measurable progress and prevent one-year anomalies from driving funding decisions.
-
----
-
-## Legislative Pitch
-Cities that grow housing faster than population without worsening affordability deserve continued investment.  
-Under the proposed Act, metros like **Austin** would qualify for “High-Performance YIMBY” grants, while metros like **New York City** could access **Reform Incentive Funds** to modernize zoning and streamline permitting.
-
-By linking evidence-based metrics to clear funding tiers (e.g., HGI > 125 and ΔRBI < 0), the bill rewards outcomes, not ideology.
-
----
-
-## Closing Appeal
-Affordable housing and strong labor markets are mutually reinforcing.  
-This program lets Congress champion both—helping growing metros build responsibly and high-cost metros regain affordability—while giving voters a simple, data-driven way to see progress in their communities.

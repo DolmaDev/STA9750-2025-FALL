@@ -14,6 +14,8 @@ website:
         text: Home
       - href: mp01.qmd
         text: MP01
+      - href: mp02.qmd
+        text: MP02
 
 format:
   html:
