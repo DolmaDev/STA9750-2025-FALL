@@ -16,9 +16,9 @@ Connect with me
 
 #This site hosts my submissions for STA 9750.  
 
-- **Mini Project 01** — [Open report](mp01.html)
-- **Mini Project 02** — [Placeholder (coming soon)](mp02.html)
-- **Mini Project 03** — [Placeholder (coming soon)](mp03.html)
+- **Mini Project 01** — [Netflix report](mp01.html)
+- **Mini Project 02** — [Making Backyards Affordable for All](mp02.html)
+- **Mini Project 03** — [Visualizing and Maintaining the Green Canopy of NYC](mp03.html)
 - **Mini Project 04** — [Placeholder (coming soon)](mp04.html)
 
 ------------------------------------------------------------------------
@@ -27,6 +27,8 @@ Connect with me
 #| include: false
 1+1
 ```
+library(fs)
+path("index.qmd") |> path_abs()
 
 ------------------------------------------------------------------------
 
