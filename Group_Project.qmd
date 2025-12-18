@@ -76,21 +76,21 @@ Three gaps motivated our approach:
 ### Noise and Quality of Life
 
 **Do ZIP codes with more nightlife venues experience more noise complaints?**\
-[Link to Dolma's individual report](PLACEHOLDER_DOLMA_REPORT_URL)
+[Link to Dolma's individual report](https://dolmadev.github.io/STA9750-2025-FALL/nightlife_noise_analysis.html)
 
-![Nightlife Density Map](PLACEHOLDER_DOLMA_IMAGE1_URL)
+![Nightlife Density Map](https://dolmadev.github.io/STA9750-2025-FALL/nightlife_noise_analysis_files/figure-html/fig-map-1.png)
 
 *Figure 1: Distribution of licensed nightlife venues across NYC*
 
 Nightlife venues cluster in predictable hotspots—especially in Manhattan and parts of Brooklyn—creating the geographic foundation for the patterns we observe in noise, mobility, and safety.
 
-![The Noise Gap Trendline](PLACEHOLDER_DOLMA_IMAGE2_URL)
+![The Noise Gap Trendline](https://dolmadev.github.io/STA9750-2025-FALL/nightlife_noise_analysis_files/figure-html/fig-binary-nightlife-1.png)
 
 *Figure 2: Noise complaints in nightlife vs. residential ZIP codes (2018–2024)*
 
 Across 2018–2024, nightlife-heavy ZIP codes consistently generate substantially more noise complaints than more residential ZIP codes, and the gap persists over time.
 
-![Top-10 Dual Ranking](PLACEHOLDER_DOLMA_IMAGE3_URL)
+![Top 10 ZIP codes by venue count vs. noise complaints](images/clipboard-1152818054.png)
 
 *Figure 3: Top 10 ZIP codes by venue count vs. noise complaints*
 
@@ -105,7 +105,7 @@ Nightlife-heavy areas face more noise complaints, but venue count alone doesn't 
 **Do crime rates rise around popular nightlife districts after midnight?**\
 [Link to Richa's individual report](https://RichaShiny.github.io/STA9750-2025-FALL/NightlifeAnalytics.html)
 
-![](images/crime_table.jpeg){width="630"}
+![Crime intensity by zone and Time Table](images/clipboard-2121974241.jpeg)
 
 ![Crime Analysis Visualizations](https://raw.githubusercontent.com/RichaShiny/STA9750-2025-FALL/main/docs/NightlifeAnalytics_files/figure-html/viz2-crime-heatmap-1.png)
 
