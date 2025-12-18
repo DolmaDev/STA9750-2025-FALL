@@ -18,7 +18,10 @@ website:
         text: MP02
       - href: mp03.qmd
         text: MP03
-
+      - href: nightlife_noise_analysis.qmd
+        text: Nightlife Noise Analysis
+      - href: Group_Project.qmd
+        text: Nightlife Analysis
 format:
   html:
     theme: sandstone
