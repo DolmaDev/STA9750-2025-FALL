@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.22">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nightlife Analysts: Apu, Chhin, Dolma, Hari, and Richa">
+<meta name="dcterms.date" content="2025-12-18">
+
+<title>How Nightlife Shapes New York City: An Analysis of Economics, Safety, and Mobility – STA 9750 Submission Material</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-cd7454b418030687c631a6a7286fbe16.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f245066ca199b7326ac6b360085ddf3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STA 9750 Submission Material</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./mp01.html"> 
+<span class="menu-text">MP01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./mp02.html"> 
+<span class="menu-text">MP02</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./mp03.html"> 
+<span class="menu-text">MP03</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <li><a href="#how-nightlife-shapes-new-york-city-an-analysis-of-economics-safety-and-mobility" id="toc-how-nightlife-shapes-new-york-city-an-analysis-of-economics-safety-and-mobility" class="nav-link" data-scroll-target="#how-nightlife-shapes-new-york-city-an-analysis-of-economics-safety-and-mobility">How Nightlife Shapes New York City: An Analysis of Economics, Safety, and Mobility</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data-sources-and-methods" id="toc-data-sources-and-methods" class="nav-link" data-scroll-target="#data-sources-and-methods">Data Sources and Methods</a>
+  <ul class="collapse">
+  <li><a href="#data-limitations" id="toc-data-limitations" class="nav-link" data-scroll-target="#data-limitations">Data Limitations</a></li>
+  </ul></li>
+  <li><a href="#related-work-and-context" id="toc-related-work-and-context" class="nav-link" data-scroll-target="#related-work-and-context">Related Work and Context</a></li>
+  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Findings</a>
+  <ul class="collapse">
+  <li><a href="#noise-and-quality-of-life" id="toc-noise-and-quality-of-life" class="nav-link" data-scroll-target="#noise-and-quality-of-life">Noise and Quality of Life</a></li>
+  <li><a href="#crime-and-public-safety" id="toc-crime-and-public-safety" class="nav-link" data-scroll-target="#crime-and-public-safety">Crime and Public Safety</a></li>
+  <li><a href="#rideshare-mobility-patterns" id="toc-rideshare-mobility-patterns" class="nav-link" data-scroll-target="#rideshare-mobility-patterns">Rideshare Mobility Patterns</a></li>
+  <li><a href="#nightlife-workforce-and-employment" id="toc-nightlife-workforce-and-employment" class="nav-link" data-scroll-target="#nightlife-workforce-and-employment">Nightlife Workforce and Employment</a></li>
+  <li><a href="#covids-impact-on-nighttime-mobility" id="toc-covids-impact-on-nighttime-mobility" class="nav-link" data-scroll-target="#covids-impact-on-nighttime-mobility">COVID’s Impact on Nighttime Mobility</a></li>
+  </ul></li>
+  <li><a href="#synthesis-how-nightlife-shapes-new-york-city" id="toc-synthesis-how-nightlife-shapes-new-york-city" class="nav-link" data-scroll-target="#synthesis-how-nightlife-shapes-new-york-city">Synthesis: How Nightlife Shapes New York City</a>
+  <ul class="collapse">
+  <li><a href="#quantifying-the-nightlife-tradeoff" id="toc-quantifying-the-nightlife-tradeoff" class="nav-link" data-scroll-target="#quantifying-the-nightlife-tradeoff">Quantifying the Nightlife Tradeoff</a></li>
+  <li><a href="#the-nightlife-concentration-effect" id="toc-the-nightlife-concentration-effect" class="nav-link" data-scroll-target="#the-nightlife-concentration-effect">The Nightlife Concentration Effect</a></li>
+  <li><a href="#covid-as-a-natural-experiment" id="toc-covid-as-a-natural-experiment" class="nav-link" data-scroll-target="#covid-as-a-natural-experiment">COVID as a Natural Experiment</a></li>
+  <li><a href="#the-venue-count-paradox" id="toc-the-venue-count-paradox" class="nav-link" data-scroll-target="#the-venue-count-paradox">The Venue Count Paradox</a></li>
+  <li><a href="#answering-the-overarching-question" id="toc-answering-the-overarching-question" class="nav-link" data-scroll-target="#answering-the-overarching-question">Answering the Overarching Question</a></li>
+  </ul></li>
+  <li><a href="#what-this-suggests-for-city-planning" id="toc-what-this-suggests-for-city-planning" class="nav-link" data-scroll-target="#what-this-suggests-for-city-planning">What This Suggests for City Planning</a>
+  <ul class="collapse">
+  <li><a href="#targeted-nightlife-zone-enforcement-8-pm4-am" id="toc-targeted-nightlife-zone-enforcement-8-pm4-am" class="nav-link" data-scroll-target="#targeted-nightlife-zone-enforcement-8-pm4-am">1. Targeted Nightlife Zone Enforcement (8 PM–4 AM)</a></li>
+  <li><a href="#enhance-late-night-transit-in-entertainment-districts" id="toc-enhance-late-night-transit-in-entertainment-districts" class="nav-link" data-scroll-target="#enhance-late-night-transit-in-entertainment-districts">2. Enhance Late-Night Transit in Entertainment Districts</a></li>
+  <li><a href="#nightlife-workforce-support-and-recovery-programs" id="toc-nightlife-workforce-support-and-recovery-programs" class="nav-link" data-scroll-target="#nightlife-workforce-support-and-recovery-programs">3. Nightlife Workforce Support and Recovery Programs</a></li>
+  <li><a href="#concentrate-rather-than-disperse-nightlife" id="toc-concentrate-rather-than-disperse-nightlife" class="nav-link" data-scroll-target="#concentrate-rather-than-disperse-nightlife">4. Concentrate Rather Than Disperse Nightlife</a></li>
+  <li><a href="#data-driven-resource-allocation" id="toc-data-driven-resource-allocation" class="nav-link" data-scroll-target="#data-driven-resource-allocation">5. Data-Driven Resource Allocation</a></li>
+  </ul></li>
+  <li><a href="#limitations-and-future-directions" id="toc-limitations-and-future-directions" class="nav-link" data-scroll-target="#limitations-and-future-directions">Limitations and Future Directions</a>
+  <ul class="collapse">
+  <li><a href="#data-and-methodological-limitations" id="toc-data-and-methodological-limitations" class="nav-link" data-scroll-target="#data-and-methodological-limitations">Data and Methodological Limitations</a></li>
+  <li><a href="#future-research-directions" id="toc-future-research-directions" class="nav-link" data-scroll-target="#future-research-directions">Future Research Directions</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">How Nightlife Shapes New York City: An Analysis of Economics, Safety, and Mobility</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nightlife Analysts: Apu, Chhin, Dolma, Hari, and Richa </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 18, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
+<p>New York City’s nightlife shapes how people move, work, and experience safety after dark. Using data on noise complaints, crime, rideshare trips, and hospitality employment before and after COVID-19, we find that nightlife impacts concentrate in specific neighborhoods and late-night hours. Nightlife areas face higher noise complaints and predictable post-midnight crime spikes, but generate disproportionate nighttime travel and economic activity, often with lower crime per venue than dispersed areas. Nightlife is <strong>manageable</strong> when city services match these time-and-place patterns.</p>
+</section>
+<section id="how-nightlife-shapes-new-york-city-an-analysis-of-economics-safety-and-mobility" class="level1">
+<h1>How Nightlife Shapes New York City: An Analysis of Economics, Safety, and Mobility</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>New York City’s nightlife supports jobs, spending, and late-night movement, but brings neighborhood tradeoffs around noise and safety. To understand nightlife’s role in modern NYC, we examine how nightlife activity connects to quality of life, mobility, and public safety.</p>
+<p>The 2019 NYC Nightlife Economy Report <a href="https://www.nyc.gov/assets/mome/pdf/NYC_Nightlife_Economic_Impact_Report_2019_digital.pdf">2019 NYC Nightlife Economy Report</a> established nightlife’s economic importance but focused on borough-level economics and predates COVID-19. We extend that work by linking nightlife to neighborhood experience, late-night travel, and crime timing before and after the pandemic.</p>
+<p>We break the overarching question into five sub-questions:</p>
+<ol type="1">
+<li><strong>Noise</strong>: Do ZIP codes with more nightlife venues experience more noise complaints?</li>
+<li><strong>Crime</strong>: Do crime rates rise around popular nightlife districts after midnight?</li>
+<li><strong>Rideshare Mobility</strong>: How do rideshare trip volumes change by hour around nightlife zones?</li>
+<li><strong>Employment</strong>: Who’s working while the city’s partying—and how did this workforce weather COVID?</li>
+<li><strong>Post-COVID Mobility</strong>: Has COVID changed the way the city moves at night (8 PM–4 AM)?</li>
+</ol>
+<p>These analyses connect nightlife to resident experience, city mobility, the night economy workforce, and public safety timing.</p>
+</section>
+<section id="data-sources-and-methods" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources-and-methods">Data Sources and Methods</h2>
+<p>We combine multiple public datasets capturing venue locations, resident complaints, crime timing, nighttime movement, and employment.</p>
+<p><strong>Nightlife Venue Data:</strong></p>
+<ul>
+<li><a href="https://data.ny.gov/d/9s3h-dpkz">NY State Liquor Authority (SLA)</a>: Licensed premises data mapping nightlife venue clusters and distinguishing nightlife-heavy from residential areas.</li>
+<li><a href="https://www.yelp.com/developers">Yelp Fusion API</a>: Venue information (bars, clubs, late-night restaurants) for nightlife density estimation.</li>
+</ul>
+<p><strong>Quality of Life and Safety Data:</strong></p>
+<ul>
+<li><a href="https://catalog.data.gov/dataset/nypd-complaint-data-historic?utm_source=chatgpt.com">NYC 311 Complaint Data</a>: Noise complaint records (2018–2024) at ZIP-code level.</li>
+<li><a href="https://catalog.data.gov/dataset/nypd-complaint-data-historic">NYPD Complaint Data Historic (2019–2023)</a>: Crime incidents mapped to taxi zones for hour-by-hour analysis.</li>
+</ul>
+<p><strong>Economic and Mobility Data:</strong></p>
+<ul>
+<li><a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page?utm_source=chatgpt.com">TLC Rideshare Trip Records</a>: Trip records comparing late-night demand across nightlife and non-nightlife zones.</li>
+<li><a href="https://www.bls.gov/cew/downloadable-data-files.htm">Bureau of Labor Statistics QCEW (NAICS 722)</a>: Quarterly employment data for Food Services &amp; Drinking Places (2019–2023).</li>
+</ul>
+<p><strong>Geographic Reference:</strong></p>
+<ul>
+<li><a href="https://data.cityofnewyork.us/Business/Zip-Code-Boundaries/i8iw-xf4u">NYC Zip Code Boundaries</a> and <a href="https://d37ci6vzurychx.cloudfront.net/misc/taxi_zones.zip">TLC Taxi Zone Shapefile</a>: Spatial boundaries.</li>
+</ul>
+<section id="data-limitations" class="level3">
+<h3 class="anchored" data-anchor-id="data-limitations">Data Limitations</h3>
+<p>Our analysis has key limitations: SLA and Yelp miss informal nightlife; 311 complaints reflect reporting behavior; NYPD data may undercount in some communities; TLC excludes walking, transit, and private vehicles; our 2019–2024 window captures COVID but not longer cycles. We triangulate across datasets to identify robust patterns.</p>
+</section>
+</section>
+<section id="related-work-and-context" class="level2">
+<h2 class="anchored" data-anchor-id="related-work-and-context">Related Work and Context</h2>
+<p>Our analysis builds on the <a href="https://www.nyc.gov/assets/mome/pdf/NYC_Nightlife_Economic_Impact_Report_2019_digital.pdf">2019 NYC Nightlife Economy Report</a>, extending it by connecting nightlife to neighborhood experience, mobility, and public safety, and examining COVID-19’s impact.</p>
+<p>Three gaps motivated our approach:</p>
+<p><strong>First, quality-of-life impacts are not integrated into nightlife economics.</strong> Prior work emphasizes jobs and tax revenue but doesn’t systematically connect nightlife concentration to noise complaints.</p>
+<p><strong>Second, public safety discussions lack temporal specificity.</strong> Nightlife areas are treated as uniformly higher-risk rather than examining hour-by-hour patterns critical for staffing decisions.</p>
+<p><strong>Third, COVID’s impact on nightlife systems remains incompletely mapped.</strong> We examine how the pandemic disrupted employment, mobility, and activity concentration.</p>
+</section>
+<section id="findings" class="level2">
+<h2 class="anchored" data-anchor-id="findings">Findings</h2>
+<section id="noise-and-quality-of-life" class="level3">
+<h3 class="anchored" data-anchor-id="noise-and-quality-of-life">Noise and Quality of Life</h3>
+<p><strong>Do ZIP codes with more nightlife venues experience more noise complaints?</strong><br>
+<a href="PLACEHOLDER_DOLMA_REPORT_URL">Link to Dolma’s individual report</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PLACEHOLDER_DOLMA_IMAGE1_URL.png" class="img-fluid figure-img"></p>
+<figcaption>Nightlife Density Map</figcaption>
+</figure>
+</div>
+<p><em>Figure 1: Distribution of licensed nightlife venues across NYC</em></p>
+<p>Nightlife venues cluster in predictable hotspots—especially in Manhattan and parts of Brooklyn—creating the geographic foundation for the patterns we observe in noise, mobility, and safety.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PLACEHOLDER_DOLMA_IMAGE2_URL.png" class="img-fluid figure-img"></p>
+<figcaption>The Noise Gap Trendline</figcaption>
+</figure>
+</div>
+<p><em>Figure 2: Noise complaints in nightlife vs.&nbsp;residential ZIP codes (2018–2024)</em></p>
+<p>Across 2018–2024, nightlife-heavy ZIP codes consistently generate substantially more noise complaints than more residential ZIP codes, and the gap persists over time.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PLACEHOLDER_DOLMA_IMAGE3_URL.png" class="img-fluid figure-img"></p>
+<figcaption>Top-10 Dual Ranking</figcaption>
+</figure>
+</div>
+<p><em>Figure 3: Top 10 ZIP codes by venue count vs.&nbsp;noise complaints</em></p>
+<p>More venues don’t automatically mean more complaints. Some high-venue areas do not top the complaint list, while several neighborhoods with fewer venues generate the most complaints. One neighborhood appearing in both lists represents a useful “testing ground” for solutions where high venue concentration and high complaints overlap.</p>
+<p>Nightlife-heavy areas face more noise complaints, but venue count alone doesn’t explain the pattern—venue type, neighborhood context, and reporting behavior also matter.</p>
+<hr>
+</section>
+<section id="crime-and-public-safety" class="level3">
+<h3 class="anchored" data-anchor-id="crime-and-public-safety">Crime and Public Safety</h3>
+<p><strong>Do crime rates rise around popular nightlife districts after midnight?</strong><br>
+<a href="https://RichaShiny.github.io/STA9750-2025-FALL/NightlifeAnalytics.html">Link to Richa’s individual report</a></p>
+<p><img src="images/crime_table.jpeg" class="img-fluid" width="630"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/RichaShiny/STA9750-2025-FALL/main/docs/NightlifeAnalytics_files/figure-html/viz2-crime-heatmap-1.png" class="img-fluid figure-img"></p>
+<figcaption>Crime Analysis Visualizations</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/RichaShiny/STA9750-2025-FALL/main/docs/NightlifeAnalytics_files/figure-html/viz1-hourly-patterns-24hr-1.png" class="img-fluid figure-img"></p>
+<figcaption>Crime Analysis Visualizations</figcaption>
+</figure>
+</div>
+<p><em>Figure 4: Crime patterns in nightlife vs.&nbsp;non-nightlife zones by hour</em></p>
+<p>Crime is not uniformly higher in nightlife districts. Instead, it becomes more time-dependent: incidents rise 30-40% after midnight and fall sharply (32-44%) after closing time. This predictable timing supports targeted staffing during a narrow 4-hour window when risk peaks. Counterintuitively, high-density nightlife districts show lower per-venue crime rates than areas with dispersed venues, suggesting concentrated nightlife is more manageable than scattered alternatives.</p>
+<p><strong>Key Insight:</strong> Nightlife districts aren’t inherently dangerous—they are <strong>time-sensitive</strong>. With evidence-based allocation, the city can balance nightlife’s economic benefits with public safety.</p>
+<hr>
+</section>
+<section id="rideshare-mobility-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="rideshare-mobility-patterns">Rideshare Mobility Patterns</h3>
+<p><strong>How do rideshare trips change by hour around NYC nightlife zones?</strong><br>
+<a href="https://hariprasadreddyk.github.io/STA9750-2025-FALL/Nightlife_Rideshare_Analysis.html">Link to Hari’s individual report</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://hariprasadreddyk.github.io/STA9750-2025-FALL/Nightlife_Rideshare_Analysis_files/figure-html/chart-nightlife-vs-other-1.png" class="img-fluid figure-img"></p>
+<figcaption>Hourly Trip Volume Comparison</figcaption>
+</figure>
+</div>
+<p><em>Figure 5: Nightlife zones sustain high rideshare demand late at night, while other zones drop off earlier</em></p>
+<p>Trips rise and remain elevated deep into the night in nightlife zones, while non-nightlife areas decline earlier—showing how nightlife concentrates late-night transportation demand into specific zones and hours.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://hariprasadreddyk.github.io/STA9750-2025-FALL/Nightlife_Rideshare_Analysis_files/figure-html/chart-surge-index-1.png" class="img-fluid figure-img"></p>
+<figcaption>Nightlife Surge Index</figcaption>
+</figure>
+</div>
+<p><em>Figure 6: Surge index showing nightlife zone trip concentration by hour</em></p>
+<p>The surge index shows when nightlife zones capture a larger-than-usual share of rideshare trips—peaking in the late-night window—helping quantify the timing of nightlife-driven mobility demand.</p>
+<hr>
+</section>
+<section id="nightlife-workforce-and-employment" class="level3">
+<h3 class="anchored" data-anchor-id="nightlife-workforce-and-employment">Nightlife Workforce and Employment</h3>
+<p><strong>Who’s working while the city’s partying?</strong><br>
+<a href="https://chhinlama.github.io/STA9750-2025-FALL/Course_Project_SQ4.html">Link to Chhin’s individual report</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://chhinlama.github.io/STA9750-2025-FALL/Course_Project_SQ4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img"></p>
+<figcaption>NYC Nightlife Employment Trends (2019–2023)</figcaption>
+</figure>
+</div>
+<p><em>Figure 7: Quarterly employment in Food Services &amp; Drinking Places (NAICS 722)</em></p>
+<p>Hospitality employment fell sharply during COVID-19 and then recovered steadily, returning near pre-pandemic levels by 2023. This trend reflects both the vulnerability of nightlife-linked work to disruption and the sector’s capacity to rebound.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://chhinlama.github.io/STA9750-2025-FALL/Course_Project_SQ4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img"></p>
+<figcaption>Comparing Nightlife Employment Recovery Across NYC Boroughs</figcaption>
+</figure>
+</div>
+<p><em>Figure 8: Borough-level recovery indexed to a 2019 baseline</em></p>
+<p>Borough recovery patterns differed, with some areas experiencing deeper declines and slower rebounds than others. (See the individual report for borough detail.)</p>
+<p>Together, these figures show that nightlife depends on a large workforce and that recovery was uneven across boroughs. Because many nightlife jobs cluster in Manhattan and Brooklyn, shifts in employment directly affect late-night mobility demand and neighborhood pressures—linking workforce stability to both economic vitality and quality-of-life outcomes. The 300,000+ workers who power nightlife venues also create “eyes on the street” during hours when residential areas go dark, connecting employment patterns to the safety dynamics examined in our crime analysis.</p>
+<hr>
+</section>
+<section id="covids-impact-on-nighttime-mobility" class="level3">
+<h3 class="anchored" data-anchor-id="covids-impact-on-nighttime-mobility">COVID’s Impact on Nighttime Mobility</h3>
+<p><strong>Has COVID changed the way the city moves at night (8 PM–4 AM)?</strong><br>
+<a href="https://dattabus-anls.github.io/STA9750-2025-FALL/Nightlife_Analytics/quarto/Nightlife_Analytics_covid.html">Link to Apu’s individual report</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://dattabus-anls.github.io/STA9750-2025-FALL/Nightlife_Analytics/quarto/hourly_night_movement.png" class="img-fluid figure-img"></p>
+<figcaption>Hourly Night Movement by COVID Period</figcaption>
+</figure>
+</div>
+<p><em>Figure 9: Nighttime trip volumes by hour across pre-COVID, during COVID, and post-COVID periods</em></p>
+<p>Night travel dropped across all hours during COVID, especially late at night. Post-COVID travel rebounds, but the pattern shifts: activity peaks earlier (8-11 PM) and declines faster after midnight. This shift matters for workers, transit planning, and public safety resource allocation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://dattabus-anls.github.io/STA9750-2025-FALL/Nightlife_Analytics/quarto/night_trip_intensity_pre_covid.png" class="img-fluid figure-img"></p>
+<figcaption>Night Trip Intensity Maps by COVID Period</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://dattabus-anls.github.io/STA9750-2025-FALL/Nightlife_Analytics/quarto/night_trip_intensity_during_covid.png" class="img-fluid figure-img"></p>
+<figcaption>Night Trip Intensity Maps by COVID Period</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://dattabus-anls.github.io/STA9750-2025-FALL/Nightlife_Analytics/quarto/night_trip_intensity_post_covid.png" class="img-fluid figure-img"></p>
+<figcaption>Night Trip Intensity Maps by COVID Period</figcaption>
+</figure>
+</div>
+<p><em>Figure 10: Geographic distribution of nighttime trips across periods</em></p>
+<p>These maps show nighttime travel concentrating in Manhattan and Brooklyn nightlife zones pre-COVID. During COVID, trips collapsed citywide, with steepest declines in nightlife hubs. Post-COVID travel rebounds most strongly in those same hubs, reinforcing geographic concentration. This spatial pattern connects directly to employment clustering (Chhin) and explains why recovery in nightlife workforce and mobility moved in lockstep.</p>
+<hr>
+</section>
+</section>
+<section id="synthesis-how-nightlife-shapes-new-york-city" class="level2">
+<h2 class="anchored" data-anchor-id="synthesis-how-nightlife-shapes-new-york-city">Synthesis: How Nightlife Shapes New York City</h2>
+<p>Our five analyses show nightlife as an integrated urban system: venue clustering affects resident noise experience, nighttime travel patterns, job concentration, and time-specific safety risks.</p>
+<section id="quantifying-the-nightlife-tradeoff" class="level3">
+<h3 class="anchored" data-anchor-id="quantifying-the-nightlife-tradeoff">Quantifying the Nightlife Tradeoff</h3>
+<p>The 78 nightlife-heavy ZIP codes generate 1.5-1.8x more noise complaints while capturing 26% of nighttime rideshare revenue and employing 56% of Manhattan’s nightlife workforce. Crime spikes 30-40% after midnight but drops 32-44% after 4 AM closures—a predictable 4-hour intervention window.</p>
+</section>
+<section id="the-nightlife-concentration-effect" class="level3">
+<h3 class="anchored" data-anchor-id="the-nightlife-concentration-effect">The Nightlife Concentration Effect</h3>
+<p>A small set of nightlife-heavy ZIP codes drives outsized effects. These areas face higher noise complaints and predictable late-night crime spikes, but risk concentrates in specific hours rather than persisting all day. These same neighborhoods concentrate late-night travel demand, showing nightlife reshapes where the city stays active after dark.</p>
+</section>
+<section id="covid-as-a-natural-experiment" class="level3">
+<h3 class="anchored" data-anchor-id="covid-as-a-natural-experiment">COVID as a Natural Experiment</h3>
+<p>COVID disrupted employment, mobility, and activity patterns simultaneously. Recovery is substantial but shifted: post-COVID nighttime travel peaks earlier and drops faster after midnight, concentrating in established nightlife hubs where workforce recovery also concentrated.</p>
+</section>
+<section id="the-venue-count-paradox" class="level3">
+<h3 class="anchored" data-anchor-id="the-venue-count-paradox">The Venue Count Paradox</h3>
+<p>More venues don’t automatically mean more disruption. High-venue districts don’t always top complaint rankings, and concentrated nightlife shows lower per-venue crime than dispersed venues. Management quality, venue mix, and neighborhood infrastructure matter as much as venue count.</p>
+</section>
+<section id="answering-the-overarching-question" class="level3">
+<h3 class="anchored" data-anchor-id="answering-the-overarching-question">Answering the Overarching Question</h3>
+<p><strong>How does nightlife activity impact New York City’s economy, safety, and quality of life?</strong></p>
+<p>Nightlife generates large economic and mobility benefits while creating concentrated, predictable neighborhood impacts—especially in a limited set of areas and late-night hours. Noise complaints are higher in nightlife-heavy ZIP codes, rideshare demand concentrates in nightlife zones after dark, and crime risk rises after midnight but falls sharply after closing time. Post-COVID, nighttime activity has rebounded but shifted toward earlier evening hours, which has implications for transit planning, staffing, and neighborhood management.</p>
+</section>
+</section>
+<section id="what-this-suggests-for-city-planning" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-suggests-for-city-planning">What This Suggests for City Planning</h2>
+<p>Our findings point to five practical, evidence-aligned next steps that match resources to where and when impacts occur.</p>
+<section id="targeted-nightlife-zone-enforcement-8-pm4-am" class="level3">
+<h3 class="anchored" data-anchor-id="targeted-nightlife-zone-enforcement-8-pm4-am">1. Targeted Nightlife Zone Enforcement (8 PM–4 AM)</h3>
+<p>Crime concentrates after midnight and drops after closing; noise complaints are consistently higher in nightlife ZIP codes. Focus quality-of-life enforcement in nightlife hotspots during the 8 PM–4 AM window when impacts peak, rather than using uniform coverage across the day.</p>
+</section>
+<section id="enhance-late-night-transit-in-entertainment-districts" class="level3">
+<h3 class="anchored" data-anchor-id="enhance-late-night-transit-in-entertainment-districts">2. Enhance Late-Night Transit in Entertainment Districts</h3>
+<p>Late-night rideshare demand concentrates in nightlife zones, and post-COVID travel patterns shifted earlier. Improve transit frequency and coverage in high-demand nightlife corridors during peak hours to reduce rideshare reliance and improve worker and patron access.</p>
+</section>
+<section id="nightlife-workforce-support-and-recovery-programs" class="level3">
+<h3 class="anchored" data-anchor-id="nightlife-workforce-support-and-recovery-programs">3. Nightlife Workforce Support and Recovery Programs</h3>
+<p>Hospitality employment fell 65% during COVID and recovered unevenly across boroughs. Support workforce stability through portable benefits, emergency savings programs, and training pathways, targeting boroughs with slower recovery.</p>
+</section>
+<section id="concentrate-rather-than-disperse-nightlife" class="level3">
+<h3 class="anchored" data-anchor-id="concentrate-rather-than-disperse-nightlife">4. Concentrate Rather Than Disperse Nightlife</h3>
+<p>Venue count doesn’t map to complaints, and concentrated districts are more manageable than dispersed nightlife. Use zoning and licensing to favor well-managed nightlife districts while protecting residential areas, scaling infrastructure in established hubs.</p>
+</section>
+<section id="data-driven-resource-allocation" class="level3">
+<h3 class="anchored" data-anchor-id="data-driven-resource-allocation">5. Data-Driven Resource Allocation</h3>
+<p>Noise, mobility, and crime patterns follow predictable geography and timing. Build a dashboard combining 311 complaints, crime-by-hour, and trip patterns to guide staffing. Pilot in neighborhoods where multiple indicators overlap before citywide expansion.</p>
+</section>
+</section>
+<section id="limitations-and-future-directions" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-future-directions">Limitations and Future Directions</h2>
+<section id="data-and-methodological-limitations" class="level3">
+<h3 class="anchored" data-anchor-id="data-and-methodological-limitations">Data and Methodological Limitations</h3>
+<p>Our analysis relies on reported incidents (311, NYPD), which reflect reporting behavior and enforcement patterns. Venue data may miss informal nightlife; mobility data excludes transit, walking, and cycling; our 2019-2024 window captures COVID but not longer cycles. Findings are correlational—causality is influenced by density, policing, and venue management.</p>
+</section>
+<section id="future-research-directions" class="level3">
+<h3 class="anchored" data-anchor-id="future-research-directions">Future Research Directions</h3>
+<p>Future work could: (1) disaggregate crime types to match interventions; (2) expand mobility measures to include transit and pedestrian activity; (3) test policy pilots (enforcement schedules, transit changes, venue management); and (4) add qualitative research explaining why some districts manage nightlife better.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>New York City’s nightlife is a system linking work, travel, resident experience, and public safety after dark. Nightlife’s impacts are real but concentrated and time-specific: noise complaints concentrate in nightlife-heavy areas, rideshare demand peaks late at night, and crime risk rises after midnight but drops after closing. COVID disrupted this system and left lasting shifts toward earlier activity concentrated in established hubs.</p>
+<p>For city planning, nightlife is manageable when services match predictable geography and timing. Targeted enforcement, enhanced late-night transit, workforce support, and planning favoring well-managed districts can sustain nightlife’s economic benefits while reducing quality-of-life friction—helping the city that never sleeps do so safely and sustainably..</p>
+<hr>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/DolmaDev\.github\.io\/STA9750-2025-FALL\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
