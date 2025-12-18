@@ -90,7 +90,7 @@ Nightlife venues cluster in predictable hotspots—especially in Manhattan and p
 
 Across 2018–2024, nightlife-heavy ZIP codes consistently generate substantially more noise complaints than more residential ZIP codes, and the gap persists over time.
 
-![Top 10 ZIP codes by venue count vs. noise complaints](images/clipboard-1152818054.png)
+![Top 10 ZIP codes by venue count vs. noise complaints](images/Noise_Compare.png)
 
 *Figure 3: Top 10 ZIP codes by venue count vs. noise complaints*
 
@@ -105,7 +105,7 @@ Nightlife-heavy areas face more noise complaints, but venue count alone doesn't 
 **Do crime rates rise around popular nightlife districts after midnight?**\
 [Link to Richa's individual report](https://RichaShiny.github.io/STA9750-2025-FALL/NightlifeAnalytics.html)
 
-![Crime intensity by zone and Time Table](images/clipboard-2121974241.jpeg)
+![Crime intensity by zone and Time Table](images/Crime_Table.jpeg)
 
 ![Crime Analysis Visualizations](https://raw.githubusercontent.com/RichaShiny/STA9750-2025-FALL/main/docs/NightlifeAnalytics_files/figure-html/viz2-crime-heatmap-1.png)
 
